@@ -2,15 +2,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MailChecker {
-    public static void main(String[] args){
-        System.out.println("Results of checking:");
-        System.out.println(checkWithRegExp("wef@@mail.ru"));
-        System.out.println(checkWithRegExp("wef@mail.ruf"));
-        System.out.println(checkWithRegExp("example@@yandex..ru"));
-        System.out.println(checkWithRegExp("ex123ample@yandexru"));
-        System.out.println(checkWithRegExp("ex123ampleyandex..ru"));
-    }
-
     public static String checkWithRegExp(String userMailString){
         Pattern p = Pattern.compile("[a-z\\d]*[@][a-z\\d]*[.][a-z]{2,3}");
         Matcher m = p.matcher(userMailString);
@@ -51,7 +42,7 @@ public class MailChecker {
             {resultMail=leftMail+rightBefPoi+rightAftPoi;}
 
         }
-        System.out.print(userMailString+" - ");
+
         return resultMail;
     }
 }

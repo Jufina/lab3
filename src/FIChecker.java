@@ -3,18 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FIChecker {
-           public static void main(String[] args){ 
-               System.out.println("Results of checking:");
-               System.out.println(checkWithRegExp("АБС"));
-               System.out.println(checkWithRegExp("дмитрийМАтрохин"));
-               System.out.println(checkWithRegExp("дмитрийМатрохиН"));
-               System.out.println(checkWithRegExp("А А"));
-               System.out.println(checkWithRegExp("ЮлияКотеева"));
-               System.out.println(checkWithRegExp("юЛия моТеева"));
-               System.out.println(checkWithRegExp("юлиямотеевА"));
-               } 
-         
-           public static String checkWithRegExp(String userNameString){
+      public static String checkWithRegExp(String userNameString){
                    Pattern p = Pattern.compile("^[А-Я][а-я]{2,20}[ ][А-Я][а-я]{2,20}$");
                    Matcher m = p.matcher(userNameString);
                String resultName="";
@@ -59,9 +48,9 @@ public class FIChecker {
                else {
                    resultName=userNameString;
                }
-               System.out.print(userNameString+" - ");
+
                return resultName;
-               //return m.matches();
+
                }
 
 }
