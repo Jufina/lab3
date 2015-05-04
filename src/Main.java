@@ -9,9 +9,9 @@ public class Main {
         try {
             inputStream=new FileInputStream("input.txt");
             outputStream=new FileOutputStream("output.txt");
-            BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
-            PrintWriter out = new PrintWriter(outputStream);
-
+            BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream,"UTF8"));
+            //PrintWriter out = new PrintWriter(outputStream);
+            BufferedWriter out=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF8"));
             while(reader.ready()) {
                 StringBuffer textBuffer=new StringBuffer();
                 textBuffer.append(reader.readLine());
@@ -20,16 +20,17 @@ public class Main {
                 if (!tokenizer.hasMoreTokens()) continue;
                 String str = tokenizer.nextToken();
                 str=FIChecker.checkWithRegExp(str);
-                out.print(str+" ");
+                out.write(str+" ");
                 if (!tokenizer.hasMoreTokens()) continue;
                 str = tokenizer.nextToken();
-                out.print(AgeChecker.checkWithRegExp(str)+" ");
+                out.write(AgeChecker.checkWithRegExp(str)+" ");
                 if (!tokenizer.hasMoreTokens()) continue;
                 str = tokenizer.nextToken();
-                out.print(PhoneChecker.checkWithRegExp(str)+" ");
+                out.write(PhoneChecker.checkWithRegExp(str)+" ");
                 if (!tokenizer.hasMoreTokens()) continue;
                 str = tokenizer.nextToken();
-                out.println(MailChecker.checkWithRegExp(str));
+                out.write(MailChecker.checkWithRegExp(str));
+                out.write("\n");
 
             }
             out.close();
