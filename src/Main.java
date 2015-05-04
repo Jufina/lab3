@@ -5,20 +5,17 @@ public class Main {
     public static void main(String[] args) {
         InputStream inputStream;
         OutputStream outputStream;
+
         try {
             inputStream=new FileInputStream("input.txt");
             outputStream=new FileOutputStream("output.txt");
-        }
-        catch(FileNotFoundException e){
-            throw new RuntimeException(e);
-        }
+            BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
+            PrintWriter out = new PrintWriter(outputStream);
 
-        //Scanner scn=new Scanner(inputStream); ЗАКОММЕНТЬ ЕГО <3
-        BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
-        PrintWriter out = new PrintWriter(outputStream);
-        try {
             while(reader.ready()) {
-                StringTokenizer tokenizer=new StringTokenizer(reader.readLine(), "|");
+                StringBuffer textBuffer=new StringBuffer();
+                textBuffer.append(reader.readLine());
+                StringTokenizer tokenizer=new StringTokenizer(textBuffer.toString(), "|");
 
                 if (!tokenizer.hasMoreTokens()) continue;
                 String str = tokenizer.nextToken();
@@ -35,10 +32,17 @@ public class Main {
                 out.println(MailChecker.checkWithRegExp(str));
 
             }
+            out.close();
         }
-        catch(IOException e) {
-            throw new RuntimeException(e);
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
         }
-        out.close();
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 }

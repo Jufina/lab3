@@ -1,4 +1,5 @@
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,8 +18,8 @@ public class FIChecker {
                        Matcher ma = pa.matcher(userNameString);
                        while (ma.find()) {
                            aName += ma.group();
-                           aName = aName.toLowerCase();
-                           aName = aName.substring(0, 1).toUpperCase() + aName.substring(1);
+                           aName = aName.toLowerCase(Locale.getDefault());
+                           aName = aName.substring(0, 1).toUpperCase(Locale.getDefault()) + aName.substring(1);
                        }
                        String cutName;
                        cutName=userNameString.substring(aName.length());
@@ -26,8 +27,8 @@ public class FIChecker {
                        Matcher mb = pb.matcher(cutName);
                        while (mb.find()) {
                            bName += mb.group();
-                           bName = bName.toLowerCase();
-                           bName = bName.substring(0, 1).toUpperCase() + bName.substring(1);
+                           bName = bName.toLowerCase(Locale.getDefault());
+                           bName = bName.substring(0, 1).toUpperCase(Locale.getDefault()) + bName.substring(1);
                        }
                        if(!bName.equals(""))
                        {resultName=aName+" "+bName;}
@@ -36,13 +37,19 @@ public class FIChecker {
                    else {
                        Pattern p3 = Pattern.compile("([А-Яа-я]{3,21})");
                        Matcher m3 = p3.matcher(userNameString);
+                       StringBuffer bufRes = new StringBuffer();
+
                        while (m3.find()) {
+                           StringBuffer bufPart = new StringBuffer();
                            String PartName = "";
-                           PartName += m3.group();
-                           PartName = PartName.toLowerCase();
-                           PartName = PartName.substring(0, 1).toUpperCase() + PartName.substring(1);
-                           resultName += PartName+" ";
+                           bufPart.append(m3.group());
+                           PartName=bufPart.toString();
+                           PartName = PartName.toLowerCase(Locale.getDefault());
+                           PartName = PartName.substring(0, 1).toUpperCase(Locale.getDefault()) + PartName.substring(1);
+                           bufRes.append(PartName);
+                           bufRes.append(" ");
                        }
+                       resultName = bufRes.toString();
                    }
                }
                else {

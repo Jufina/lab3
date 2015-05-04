@@ -8,9 +8,12 @@ public class PhoneChecker {
         String resultPhone="+";
         String AllPhone="";
         String curPhone;
+        StringBuffer bufPhone = new StringBuffer();
         while(m.find()) {
-            AllPhone+=m.group();
+
+            bufPhone.append(m.group());
         }
+        AllPhone=bufPhone.toString();
         String firstPhone=AllPhone.substring(0,1);
         if(AllPhone.length() != 11 || (!firstPhone.equals("7") && !firstPhone.equals("8")))
         {resultPhone="";}
