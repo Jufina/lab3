@@ -2,18 +2,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneChecker {
-     public static String checkWithRegExp(String userPhoneString){
+    public static String checkWithRegExp(String userPhoneString){
         Pattern p = Pattern.compile("(\\d)");
         Matcher m = p.matcher(userPhoneString);
         String resultPhone="+";
         String AllPhone="";
         String curPhone;
-        StringBuffer bufPhone = new StringBuffer();
         while(m.find()) {
-
-            bufPhone.append(m.group());
+            AllPhone+=m.group();
         }
-        AllPhone=bufPhone.toString();
         String firstPhone=AllPhone.substring(0,1);
         if(AllPhone.length() != 11 || (!firstPhone.equals("7") && !firstPhone.equals("8")))
         {resultPhone="";}

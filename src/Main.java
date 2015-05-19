@@ -5,45 +5,40 @@ public class Main {
     public static void main(String[] args) {
         InputStream inputStream;
         OutputStream outputStream;
-
         try {
             inputStream=new FileInputStream("input.txt");
             outputStream=new FileOutputStream("output.txt");
-            BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream,"UTF8"));
-            //PrintWriter out = new PrintWriter(outputStream);
-            BufferedWriter out=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF8"));
+        }
+        catch(FileNotFoundException e){
+            throw new RuntimeException(e);
+        }
+
+        //Scanner scn=new Scanner(inputStream); ЗАКОММЕНТЬ ЕГО <3
+        BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
+        PrintWriter out = new PrintWriter(outputStream);
+        try {
             while(reader.ready()) {
-                StringBuffer textBuffer=new StringBuffer();
-                textBuffer.append(reader.readLine());
-                StringTokenizer tokenizer=new StringTokenizer(textBuffer.toString(), "|");
+                StringTokenizer tokenizer=new StringTokenizer(reader.readLine(), "|");
 
                 if (!tokenizer.hasMoreTokens()) continue;
                 String str = tokenizer.nextToken();
                 str=FIChecker.checkWithRegExp(str);
-                out.write(str+" ");
+                out.print(str+" ");
                 if (!tokenizer.hasMoreTokens()) continue;
                 str = tokenizer.nextToken();
-                out.write(AgeChecker.checkWithRegExp(str)+" ");
+                out.print(AgeChecker.checkWithRegExp(str)+" ");
                 if (!tokenizer.hasMoreTokens()) continue;
                 str = tokenizer.nextToken();
-                out.write(PhoneChecker.checkWithRegExp(str)+" ");
+                out.print(PhoneChecker.checkWithRegExp(str)+" ");
                 if (!tokenizer.hasMoreTokens()) continue;
                 str = tokenizer.nextToken();
-                out.write(MailChecker.checkWithRegExp(str));
-                out.write("\n");
+                out.println(MailChecker.checkWithRegExp(str));
 
             }
-            out.close();
         }
-        catch (IOException e)
-        {
-            System.out.println(e.getMessage());
+        catch(IOException e) {
+            throw new RuntimeException(e);
         }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-
-
+        out.close();
     }
 }
